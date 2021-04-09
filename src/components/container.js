@@ -9,21 +9,37 @@ class Container extends React.Component {
        
         }
     }
-    borrar= (id ) => {  
-        // console.log("hola")
-        //  var filtrado= arrayPersonajes.filter(function(filtrada){
-        //      if ({filtrada === {arrayPersonajes.id}}) {
-                
-        //      }
-        //  })
+    borrar= (id) => {  
+        // console.log(id)
+        
+            let filtrado = arrayPersonajes.filter(function(persona){
+             if(persona.id === id){
+                 return persona
+             }
+            // return arrayPersonajes.id == filtrada.id
+         })
     
+        //  arrayPersonajes.forEach(element => {
+             
+        //  });
+
+        //  arrayPersonajes.forEach(function(personaje) {
+        //      console.log();
+        //     if (arrayPersonajes.id === personaje.id) {
+        //       return (
+        //           arrayPersonajes
+                
+        //       )
+        //     }
+        //   });
+          
     };
     
 render() {
     return(
     <div className="container">
              {
-        arrayPersonajes.map(function(unPersonaje,idx){
+        arrayPersonajes.map((unPersonaje,idx) =>{
             return(
             <Personaje personajeAMostrar={unPersonaje} key={idx} color= "green"
             id={unPersonaje.id}
@@ -33,7 +49,7 @@ render() {
             origin={unPersonaje.origin.name}
             status={unPersonaje.status}
             gender={unPersonaje.gender}
-            borrarTarjeta = {()=>this.borrar()}
+            borrarTarjeta = {this.borrar}
             />
             )
               })

@@ -10,15 +10,9 @@ constructor(props) {
     this.state= {
         color: this.props.color,
         colorOriginal:this.props.color,
+        valor: this.props.valor
           }
     }
-    guardarId= (id)=>{
-        console.log("este es el ID " + id);
-
-    }
-
-
-
 
     cambiarColor= (nuevoColor)=>{
         console.log("cambiar color a " + nuevoColor);
@@ -27,30 +21,35 @@ constructor(props) {
         console.log(this.state.color);
         }
         else{
-
         this.setState({color: this.state.colorOriginal})
         console.log(this.state.color)
         }
     }
 
-    
+    MouseEnter = (colorEntrar) => {
+        if(this.state.color == this.state.colorOriginal) {
+            this.setState({color: colorEntrar})
+        }
+    }
 
+    MouseLeave = (colorViejo) => {
+        if(this.state.color == "grey") {
+            this.setState({color: colorViejo})
+        }
+        // console.log("Salgo de la tarjeta a " + colorViejo);
+    }
 
-
-
-
-
-
-   
 
     render(){
 
         const { img, name, origin,status,gender,species,borrarTajeta,id} = this.props;
 
         return (
-
-                                
-            <div className="personaje" style={{backgroundColor: this.state.color}}>
+               
+            <div className="personaje" style={{backgroundColor: this.state.color}}
+            onMouseEnter={this.MouseEnter.bind(this,"grey")}
+            onMouseLeave={this.MouseLeave.bind(this,this.state.colorOriginal)}
+            >
              <h2>{name}</h2>
              <img className="imgPersonaje" src={img}/>
              <p>Estatus: {status}</p>
@@ -62,11 +61,10 @@ constructor(props) {
                  Cambiar color 
             </Button>
             <br></br>
-            <Button variant="danger"  onClick={()=>this.guardarId(id)}>
-                 borrar
+            <Button variant="danger"  onClick={()=>this.props.borrarTarjeta(id)}>
+                 Borrar
             </Button>
         
-
          </div>
         )
     }
